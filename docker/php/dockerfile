@@ -1,0 +1,32 @@
+FROM php:8.3-fpm
+
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    curl \
+    libicu-dev \
+    libxml2-dev \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    intl \
+    xml \
+    zip \
+    bcmath \
+    opcache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY docker/php/php.ini /usr/local/etc/php/php.ini
+
+# Symfony CLI
+COPY --link \
+    --from=ghcr.io/symfony-cli/symfony-cli:latest \
+    /usr/local/bin/symfony /usr/local/bin/symfony
+
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
