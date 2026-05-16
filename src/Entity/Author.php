@@ -6,16 +6,24 @@ use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Author
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Author name must contain at least {{ limit }} characters.',
+        maxMessage: 'Author name cannot exceed {{ limit }} characters.'
+    )]
+    #[Assert\NotBlank(message: 'Author name is required.')]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

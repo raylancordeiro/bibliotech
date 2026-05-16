@@ -8,17 +8,17 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: BookAuthorRepository::class)]
 class BookAuthor
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookAuthors')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'bookAuthors')]
     private ?Book $book = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookAuthors')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'bookAuthors')]
     private ?Author $author = null;
 
     public function getId(): ?int

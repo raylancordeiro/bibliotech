@@ -6,16 +6,24 @@ use App\Repository\SubjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SubjectRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Subject
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
     private ?int $id = null;
 
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Subject description must contain at least {{ limit }} characters.',
+        maxMessage: 'Subject description cannot exceed {{ limit }} characters.'
+    )]
+    #[Assert\NotBlank(message: 'Subject description is required.')]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
