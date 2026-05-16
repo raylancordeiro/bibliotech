@@ -9,17 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\HasLifecycleCallbacks]
 class BookSubject
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookSubjects')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'bookSubjects')]
     private ?Book $book = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookSubjects')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'bookSubjects')]
     private ?Subject $subject = null;
 
     public function getId(): ?int

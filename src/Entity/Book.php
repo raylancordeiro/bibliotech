@@ -6,36 +6,54 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Book
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
     private ?int $id = null;
 
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Title cannot exceed {{ limit }} characters.'
+    )]
+    #[Assert\NotBlank(message: 'Title is required.')]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Publisher cannot exceed {{ limit }} characters.'
+    )]
+    #[Assert\NotBlank(message: 'Publisher is required.')]
     #[ORM\Column(length: 255)]
     private ?string $publisher = null;
 
+    #[Assert\Length(
+        max: 50,
+        maxMessage: 'Edition cannot exceed {{ limit }} characters.'
+    )]
+    #[Assert\NotBlank(message: 'Edition is required.')]
     #[ORM\Column(length: 50)]
     private ?string $edition = null;
 
+    #[Assert\NotNull(message: 'Publication year is required.')]
+    #[Assert\Range(
+        notInRangeMessage: 'Publication year must be between {{ min }} and {{ max }}.',
+        min: 1500,
+        max: 2100
+    )]
     #[ORM\Column]
     private ?int $publicationYear = null;
 
+    #[Assert\NotBlank(message: 'Price is required.')]
+    #[Assert\Positive(message: 'Price must be greater than zero.')]
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private ?string $price = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, BookAuthor>
@@ -48,6 +66,12 @@ class Book
      */
     #[ORM\OneToMany(targetEntity: BookSubject::class, mappedBy: 'book')]
     private Collection $bookSubjects;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
