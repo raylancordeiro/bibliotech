@@ -1,0 +1,11 @@
+.table {
+    --bs-table-hover-bg: rgba(17, 24, 39, 0.20);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(17, 24, 39, 0.02);
+}
+
+.table-hover > tbody > tr:hover > * {
+    transition: background-color 0.15s ease;
+}

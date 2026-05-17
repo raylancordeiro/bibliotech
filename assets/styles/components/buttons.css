@@ -1,0 +1,23 @@
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #111827;
+    border-color: #111827;
+}
+
+.btn-primary:hover {
+    background: #1f2937;
+    border-color: #1f2937;
+}
+
+.btn-warning {
+    color: white;
+}
