@@ -1,0 +1,15 @@
+project_name: BiblioTech
+books: Livros
+create_book: Criar Livro
+edit_book: Editar Livro
+save_book: Salvar Livro
+publisher: Editora
+edition: Edição
+publication_year: Ano de Publicação
+price: Preço
+actions: Ações
+no_books_found: Nenhum livro encontrado.
+
+are_you_sure: Você tem certeza disso?
+
+title: Título

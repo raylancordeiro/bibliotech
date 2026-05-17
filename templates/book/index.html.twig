@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'project_name'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+            <h1>{{ 'books'|trans }}</h1>
+
+            <button
+                id="createBookBtn"
+                type="button"
+                class="btn btn-primary align-self-md-start"
+                data-bs-toggle="modal"
+                data-bs-target="#createBookModal"
+            >
+                {{ 'create_book'|trans }}
+            </button>
+        </div>
+
+        <div class="toast-container">
+
+            {% for message in app.flashes('success') %}
+                <div class="custom-toast custom-toast-success">
+
+                    <div class="custom-toast-content">
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        <span>
+                    {{ message }}
+                </span>
+
+                    </div>
+
+                    <button
+                        class="custom-toast-close"
+                        type="button"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+        {% include 'book/_table.html.twig' %}
+
+    </div>
+
+    {% include 'book/_modal.html.twig' %}
+
+{% endblock %}

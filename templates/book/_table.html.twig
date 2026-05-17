@@ -1,0 +1,68 @@
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mb-0">
+
+                <thead class="table-dark">
+                <tr>
+                    <th>{{ 'title'|trans }}</th>
+                    <th>{{ 'publisher'|trans }}</th>
+                    <th>{{ 'edition'|trans }}</th>
+                    <th>{{ 'publication_year'|trans }}</th>
+                    <th>{{ 'price'|trans }}</th>
+                    <th>{{ 'actions'|trans }}</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% if books is empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-4">
+                            {{ 'no_books_found'|trans }}
+                        </td>
+                    </tr>
+                {% else %}
+                    {% for book in books %}
+                        <tr>
+                            <td hidden>{{ book.id }}</td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.publisher }}</td>
+                            <td>{{ book.edition }}</td>
+                            <td>{{ book.publicationYear }}</td>
+                            <td>{{ book.price|format_currency('BRL', locale='pt_BR') }}</td>
+
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <a
+                                        href="#"
+                                        class="text-warning js-edit-book"
+                                        data-id="{{ book.id }}"
+                                        data-title="{{ book.title }}"
+                                        data-publisher="{{ book.publisher }}"
+                                        data-edition="{{ book.edition }}"
+                                        data-publication-year="{{ book.publicationYear }}"
+                                        data-price="{{ book.price }}"
+                                    >
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <a
+                                        href="{{ path('book_delete', { id: book.id }) }}"
+                                        class="text-danger"
+                                        onclick="return confirm('{{ 'are_you_sure'|trans|e('js') }}')"
+                                    >
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

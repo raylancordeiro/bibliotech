@@ -1,0 +1,72 @@
+<div
+    class="modal fade"
+    id="createBookModal"
+    data-auto-open="{{ isFormInvalid ? 'true' : 'false' }}"
+    tabindex="-1"
+    aria-labelledby="createBookModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+         style="max-width: 550px;">
+
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header bg-dark text-white">
+                <h5
+                    class="modal-title"
+                    id="bookModalTitle"
+                >
+                    {{ 'create_book'|trans }}
+                </h5>
+                <div class="ms-auto d-flex align-items-center gap-3">
+
+                    <button
+                        type="button"
+                        class="btn modal-minimize-btn text-white p-0 border-0 shadow-none"
+                        data-bs-dismiss="modal"
+                        aria-label="Minimize"
+                    >
+                        <i class="bi bi-dash-lg fs-4"></i>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        id="closeBookBtn"
+                    ></button>
+
+                </div>
+            </div>
+
+            {{ form_start(form, {
+                action: path('book_index'),
+                attr: {
+                    'data-turbo': 'false',
+                    'id': 'createBookForm'
+                }
+            }) }}
+
+            <div class="modal-body p-4">
+
+                {% include 'book/_form.html.twig' %}
+
+            </div>
+
+            <div class="modal-footer flex-column flex-md-row gap-4">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100"
+                >
+                    {{ 'save_book'|trans }}
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</div>
