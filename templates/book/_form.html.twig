@@ -3,7 +3,10 @@
     <div class="col-md-6 mb-3">
         {{ form_label(form.title) }}
         {{ form_widget(form.title, {
-            attr: { class: 'form-control form-control-lg' }
+            attr: {
+                class: 'form-control form-control-lg',
+                id: 'book_title'
+            }
         }) }}
         {{ form_errors(form.title) }}
     </div>
@@ -11,7 +14,9 @@
     <div class="col-md-6 mb-3">
         {{ form_label(form.publisher) }}
         {{ form_widget(form.publisher, {
-            attr: { class: 'form-control form-control-lg' }
+            attr: {
+                id: 'book_publisher',
+                class: 'form-control form-control-lg' }
         }) }}
         {{ form_errors(form.publisher) }}
     </div>
@@ -19,7 +24,9 @@
     <div class="col-md-4 mb-3">
         {{ form_label(form.edition) }}
         {{ form_widget(form.edition, {
-            attr: { class: 'form-control form-control-lg' }
+            attr: {
+                id: 'book_edition',
+                class: 'form-control form-control-lg' }
         }) }}
         {{ form_errors(form.edition) }}
     </div>
@@ -28,6 +35,7 @@
         {{ form_label(form.publicationYear) }}
         {{ form_widget(form.publicationYear, {
             attr: {
+                id: 'book_publicationYear',
                 class: form.publicationYear.vars.errors|length > 0
                 ? 'form-control form-control-lg is-invalid'
                 : 'form-control form-control-lg'
@@ -44,6 +52,7 @@
 
             {{ form_widget(form.price, {
                 attr: {
+                    id:'book_price' ,
                     class: form.price.vars.errors|length > 0
                     ? 'form-control is-invalid js-money-mask'
                     : 'form-control js-money-mask'

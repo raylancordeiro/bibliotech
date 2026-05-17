@@ -46,31 +46,45 @@ class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'book_create', methods: ['GET', 'POST'])]
-    public function create(
+    #[Route('/{id}/delete', name: 'book_delete', methods: ['GET'])]
+    public function delete(
         Request $request,
+        Book $book,
         EntityManagerInterface $entityManager
     ): Response {
-        $book = new Book();
 
+        $entityManager->remove($book);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Book deleted successfully.'
+        );
+
+        return $this->redirectToRoute('book_index');
+    }
+
+    #[Route('/{id}/update', name: 'book_update', methods: ['POST'])]
+    public function update(
+        Request $request,
+        Book $book,
+        EntityManagerInterface $entityManager
+    ): Response {
         $form = $this->createForm(BookType::class, $book);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($book);
+
             $entityManager->flush();
 
             $this->addFlash(
                 'success',
-                'Book created successfully.'
+                'Book updated successfully.'
             );
 
-            return $this->redirectToRoute('book_index');
         }
 
-        return $this->render('book/create.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('book_index');
     }
 }

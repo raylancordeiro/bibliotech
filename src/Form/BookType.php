@@ -20,19 +20,19 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Title',
+                'label' => 'title',
             ])
             ->add('publisher', TextType::class, [
-                'label' => 'Publisher',
+                'label' => 'publisher',
             ])
             ->add('edition', TextType::class, [
-                'label' => 'Edition',
+                'label' => 'edition',
             ])
             ->add('publicationYear', IntegerType::class, [
-                'label' => 'Publication Year',
+                'label' => 'publication_year',
             ])
             ->add('price', TextType::class, [
-                'label' => 'Price',
+                'label' => 'price',
                 'attr' => [
                     'id' => 'price',
                     'inputmode' => 'decimal',

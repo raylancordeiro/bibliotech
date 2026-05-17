@@ -12,8 +12,11 @@
         <div class="modal-content border-0 shadow">
 
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="createBookModalLabel">
-                    Create Book
+                <h5
+                    class="modal-title"
+                    id="bookModalTitle"
+                >
+                    {{ 'create_book'|trans }}
                 </h5>
                 <div class="ms-auto d-flex align-items-center gap-3">
 
@@ -38,6 +41,7 @@
             </div>
 
             {{ form_start(form, {
+                action: path('book_index'),
                 attr: {
                     'data-turbo': 'false',
                     'id': 'createBookForm'
@@ -50,13 +54,13 @@
 
             </div>
 
-            <div class="modal-footer flex-column flex-md-row gap-2">
+            <div class="modal-footer flex-column flex-md-row gap-4">
 
                 <button
                     type="submit"
                     class="btn btn-primary w-100"
                 >
-                    Save Book
+                    {{ 'save_book'|trans }}
                 </button>
 
             </div>

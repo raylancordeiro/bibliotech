@@ -8,6 +8,7 @@ import './stimulus_bootstrap.js';
 import './js/components/money-mask.js';
 import './js/components/modal-form-reset.js';
 import './js/components/toast.js';
+import './js/components/form.js';
 
 import './styles/app.css';
 
