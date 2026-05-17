@@ -3,6 +3,8 @@
 @import './components/buttons.css';
 @import './components/toast.css';
 @import './components/table.css';
+@import './components/navbar.css';
+
 body {
     background-color: skyblue;
 }

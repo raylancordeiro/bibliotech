@@ -9,13 +9,13 @@
 }
 
 .btn-primary {
-    background: #111827;
-    border-color: #111827;
+    background: #191919;
+    border-color: #191919;
 }
 
 .btn-primary:hover {
-    background: #1f2937;
-    border-color: #1f2937;
+    background: #1A1A1A;
+    border-color: #1A1A1A;
 }
 
 .btn-warning {
