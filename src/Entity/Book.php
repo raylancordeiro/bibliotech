@@ -22,7 +22,7 @@ class Book
         maxMessage: 'Title cannot exceed {{ limit }} characters.'
     )]
     #[Assert\NotBlank(message: 'Title is required.')]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $title = null;
 
     #[Assert\Length(

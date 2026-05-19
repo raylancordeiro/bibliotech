@@ -1,0 +1,43 @@
+{% for message in app.flashes('success') %}
+    <div class="custom-toast custom-toast-success custom-toast-border-success">
+
+        <div class="custom-toast-content custom-toast-content-success">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            <span>
+                    {{ message|trans }}
+                </span>
+
+        </div>
+
+        <button
+            class="custom-toast-close"
+            type="button"
+        >
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="custom-toast custom-toast-success custom-toast-border-danger">
+
+        <div class="custom-toast-content custom-toast-content-danger">
+
+            <i class="bi bi-bug-fill"></i>
+
+            <span class="custom-toast-content-danger">
+                    {{ message|trans }}
+                </span>
+
+        </div>
+
+        <button
+            class="custom-toast-close"
+            type="button"
+        >
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+{% endfor %}

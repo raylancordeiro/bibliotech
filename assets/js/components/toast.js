@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeButtons.forEach(button => {
 
         button.addEventListener('click', function (e) {
-console.log("clique");
+
             e.preventDefault();
             e.stopPropagation();
 

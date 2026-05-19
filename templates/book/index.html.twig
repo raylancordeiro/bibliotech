@@ -21,28 +21,7 @@
 
         <div class="toast-container">
 
-            {% for message in app.flashes('success') %}
-                <div class="custom-toast custom-toast-success">
-
-                    <div class="custom-toast-content">
-
-                        <i class="bi bi-check-circle-fill"></i>
-
-                        <span>
-                    {{ message }}
-                </span>
-
-                    </div>
-
-                    <button
-                        class="custom-toast-close"
-                        type="button"
-                    >
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-
-                </div>
-            {% endfor %}
+            {% include '././flashes.html.twig' %}
 
         </div>
 

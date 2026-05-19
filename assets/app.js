@@ -9,6 +9,7 @@ import './js/components/money-mask.js';
 import './js/components/modal-form-reset.js';
 import './js/components/toast.js';
 import './js/components/form.js';
+import './js/components/table.js'
 
 import './styles/app.css';
 

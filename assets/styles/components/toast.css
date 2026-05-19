@@ -32,13 +32,20 @@
 
     animation: toast-slide-in .3s ease;
 
-    border-left: 5px solid #198754;
-
     pointer-events: all;
 
     position: relative;
 
     z-index: 999999;
+}
+
+.custom-toast-border-success {
+    border-left: 5px solid #198754;
+}
+
+
+.custom-toast-border-danger {
+    border-left: 5px solid #dc3545;
 }
 
 .custom-toast-content {
@@ -52,10 +59,22 @@
     flex: 1;
 }
 
-.custom-toast-content i {
-    color: #198754;
+.custom-toast-content-success i {
+    color: var(--success-color);
     font-size: 1.1rem;
 }
+
+
+.custom-toast-content-danger {
+    color: var(--danger-color);
+    font-size: 1.1rem;
+}
+
+.custom-toast-content-success {
+    color: var(--success-color);
+    font-size: 1.1rem;
+}
+
 
 .custom-toast-close {
     border: none;
