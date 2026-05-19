@@ -13,3 +13,8 @@ no_books_found: Nenhum livro encontrado.
 are_you_sure: Você tem certeza disso?
 
 title: Título
+
+flash:
+    book_created_successfully: Livro criado com sucesso!
+    book_deleted_successfully: Livro deletado com sucesso!
+    book_updated_successfully: Livro atualizado com sucesso!

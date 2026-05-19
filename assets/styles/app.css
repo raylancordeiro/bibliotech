@@ -5,6 +5,11 @@
 @import './components/table.css';
 @import './components/navbar.css';
 
+:root {
+    --danger-color: #dc3545;
+    --success-color: #198754;
+}
+
 body {
     background-color: skyblue;
 }

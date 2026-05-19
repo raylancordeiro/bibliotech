@@ -49,8 +49,9 @@
                                     </a>
                                     <a
                                         href="{{ path('book_delete', { id: book.id }) }}"
-                                        class="text-danger"
-                                        onclick="return confirm('{{ 'are_you_sure'|trans|e('js') }}')"
+                                        class="text-danger js-confirm-delete"
+                                        data-turbo="false"
+                                        data-message="{{ 'are_you_sure'|trans|e('html_attr') }}"
                                     >
                                         <i class="bi bi-trash-fill"></i>
                                     </a>

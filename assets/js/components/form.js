@@ -18,13 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const publicationYear = document.getElementById('book_publicationYear');
     const price = document.getElementById('book_price');
 
-    function resetFormToCreateMode() {
+    const editTitle = modalTitle.dataset.editTitle;
+    const createTitle = modalTitle.dataset.createTitle;
 
-        form.reset();
+    function resetFormToCreateMode() {
 
         form.action = '/books';
 
-        modalTitle.innerText = 'Create Book';
+        modalTitle.innerText = modalTitle.dataset.createTitle;
 
         form.querySelectorAll('.is-invalid').forEach(el => {
             el.classList.remove('is-invalid');
@@ -47,11 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             form.action = `/books/${id}/update`;
 
-            modalTitle.innerText = 'Edit Book';
+            modalTitle.innerText = modalTitle.dataset.editTitle;
 
             const rawPrice = button.dataset.price;
-
-
 
             title.value = button.dataset.title;
             publisher.value = button.dataset.publisher;
@@ -63,9 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             modal.show();
-
         });
-
     });
-
 });

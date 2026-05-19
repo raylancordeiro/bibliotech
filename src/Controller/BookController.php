@@ -26,17 +26,24 @@ class BookController extends AbstractController
             $book
         );
 
-        $form->handleRequest($request);
+        try {
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $bookService->create($book);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $bookService->create($book);
 
+                $this->addFlash(
+                    'success',
+                'flash.book_created_successfully'
+                );
+
+                return $this->redirectToRoute('book_index');
+            }
+        } catch (\Exception $exception) {
             $this->addFlash(
-                'success',
-                'Book created successfully.'
+                'error',
+                $exception->getMessage()
             );
-
-            return $this->redirectToRoute('book_index');
         }
 
         return $this->render('book/index.html.twig', [
@@ -53,12 +60,18 @@ class BookController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
-        $entityManager->remove($book);
-        $entityManager->flush();
-
+        try {
+            $entityManager->remove($book);
+            $entityManager->flush();
+        } catch (\Exception $exception) {
+            $this->addFlash(
+                'error',
+                $exception->getMessage()
+            );
+        }
         $this->addFlash(
             'success',
-            'Book deleted successfully.'
+            'flash.book_deleted_successfully'
         );
 
         return $this->redirectToRoute('book_index');
@@ -72,17 +85,24 @@ class BookController extends AbstractController
     ): Response {
         $form = $this->createForm(BookType::class, $book);
 
-        $form->handleRequest($request);
+        try {
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $entityManager->flush();
+                $entityManager->flush();
 
+                $this->addFlash(
+                    'success',
+                    'flash.book_updated_successfully'
+                );
+
+            }
+        } catch (\Exception $exception) {
             $this->addFlash(
-                'success',
-                'Book updated successfully.'
+                'error',
+                $exception->getMessage()
             );
-
         }
 
         return $this->redirectToRoute('book_index');
