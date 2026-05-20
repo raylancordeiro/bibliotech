@@ -1,16 +1,20 @@
 project_name: BiblioTech
-books: Livros
-create_book: Criar Livro
-edit_book: Editar Livro
-save_book: Salvar Livro
+
+actions: Ações
+save: Salvar
+name: Nome
 publisher: Editora
 edition: Edição
 publication_year: Ano de Publicação
 price: Preço
-actions: Ações
-no_books_found: Nenhum livro encontrado.
-
 are_you_sure: Você tem certeza disso?
+create: Criar
+
+books:
+    title: Livros
+    create: Criar Livro
+    edit: Editar Livro
+    not_found: Nenhum livro encontrado.
 
 title: Título
 
@@ -18,3 +22,13 @@ flash:
     book_created_successfully: Livro criado com sucesso!
     book_deleted_successfully: Livro deletado com sucesso!
     book_updated_successfully: Livro atualizado com sucesso!
+
+authors: Autores
+author:
+    not_found: Nenhum autor encontrado.
+    created_successfully: Autor criado com sucesso.
+    already_exists: Já existe um autor com este nome.
+    flash:
+        created_successfully: Autor criado com sucesso!
+        deleted_successfully: Autor deletado com sucesso!
+        updated_successfully: Autor atualizado com sucesso!

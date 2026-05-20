@@ -20,7 +20,7 @@
                 {% if books is empty %}
                     <tr>
                         <td colspan="6" class="text-center py-4">
-                            {{ 'no_books_found'|trans }}
+                            {{ 'books.not_found'|trans }}
                         </td>
                     </tr>
                 {% else %}
@@ -37,7 +37,10 @@
                                 <div class="d-flex align-items-center gap-3">
                                     <a
                                         href="#"
-                                        class="text-warning js-edit-book"
+                                        class="text-warning js-edit-modal"
+                                        data-modal-target="#createBookModal"
+                                        data-modal-title="Edit Book"
+                                        data-action="/books/{{ book.id }}/update"
                                         data-id="{{ book.id }}"
                                         data-title="{{ book.title }}"
                                         data-publisher="{{ book.publisher }}"
