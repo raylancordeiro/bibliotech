@@ -1,0 +1,63 @@
+<div
+    class="modal fade js-form-modal"
+    id="createSubjectModal"
+    tabindex="-1"
+    aria-hidden="true"
+    {% if isFormInvalid %}
+        data-auto-open="true"
+    {% endif %}
+>
+
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header bg-dark text-white">
+
+                <h5
+                    class="modal-title js-modal-title"
+                    data-create-title="{{ 'create'|trans }}"
+                >
+                    {{ 'create'|trans }}
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white js-modal-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+            {{ form_start(form, {
+                attr: {
+                    'data-turbo': 'false',
+                    'id': 'subjectForm'
+                }
+            }) }}
+
+            <div class="modal-body p-4">
+
+                {% include 'subject/_form.html.twig' %}
+
+            </div>
+
+            <div class="modal-footer flex-column flex-md-row gap-2">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100"
+                >
+                    {{ 'save'|trans }}
+                </button>
+
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+</div>

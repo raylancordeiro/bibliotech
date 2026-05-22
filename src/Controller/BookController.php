@@ -19,6 +19,7 @@ class BookController extends AbstractController
         Request $request,
         BookService $bookService
     ): Response {
+
         $book = new Book();
 
         $form = $this->createForm(
@@ -27,10 +28,16 @@ class BookController extends AbstractController
         );
 
         try {
+
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $bookService->create($book);
+
+                $bookService->create(
+                    $book,
+                    $form->get('authors')->getData()->toArray(),
+                    $form->get('subjects')->getData()->toArray()
+                );
 
                 $this->addFlash(
                     'success',
@@ -39,7 +46,9 @@ class BookController extends AbstractController
 
                 return $this->redirectToRoute('book_index');
             }
+
         } catch (\Exception $exception) {
+
             $this->addFlash(
                 'error',
                 $exception->getMessage()
@@ -55,20 +64,24 @@ class BookController extends AbstractController
 
     #[Route('/{id}/delete', name: 'book_delete', methods: ['GET'])]
     public function delete(
-        Request $request,
         Book $book,
         EntityManagerInterface $entityManager
     ): Response {
 
         try {
+
             $entityManager->remove($book);
+
             $entityManager->flush();
+
         } catch (\Exception $exception) {
+
             $this->addFlash(
                 'error',
                 $exception->getMessage()
             );
         }
+
         $this->addFlash(
             'success',
             'flash.book_deleted_successfully'
@@ -81,24 +94,31 @@ class BookController extends AbstractController
     public function update(
         Request $request,
         Book $book,
-        EntityManagerInterface $entityManager
+        BookService $bookService
     ): Response {
+
         $form = $this->createForm(BookType::class, $book);
 
         try {
+
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $entityManager->flush();
+                $bookService->update(
+                    $book,
+                    $form->get('authors')->getData()->toArray(),
+                    $form->get('subjects')->getData()->toArray()
+                );
 
                 $this->addFlash(
                     'success',
                     'flash.book_updated_successfully'
                 );
-
             }
+
         } catch (\Exception $exception) {
+
             $this->addFlash(
                 'error',
                 $exception->getMessage()

@@ -9,6 +9,7 @@ publication_year: Ano de Publicação
 price: Preço
 are_you_sure: Você tem certeza disso?
 create: Criar
+description: Descrição
 
 books:
     title: Livros
@@ -32,3 +33,14 @@ author:
         created_successfully: Autor criado com sucesso!
         deleted_successfully: Autor deletado com sucesso!
         updated_successfully: Autor atualizado com sucesso!
+
+subjects: Assuntos
+
+subject:
+    not_found: Nenhum assunto encontrado.
+    flash:
+        created_successfully: Assunto criado com sucesso!
+        updated_successfully: Assunto criado com sucesso!
+        deleted_successfully: Assunto criado com sucesso!
+
+subject_already_exists: Este assunto já existe!
