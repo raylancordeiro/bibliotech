@@ -1,0 +1,86 @@
+<div class="card shadow-sm border-0">
+
+    <div class="card-body p-0">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped mb-0">
+
+                <thead class="table-dark">
+                <tr>
+
+                    <th>
+                        {{ 'description'|trans }}
+                    </th>
+
+                    <th>
+                        {{ 'actions'|trans }}
+                    </th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% if subjects is empty %}
+
+                    <tr>
+                        <td colspan="2" class="text-center py-4">
+                            {{ 'subject.not_found'|trans }}
+                        </td>
+                    </tr>
+
+                {% else %}
+
+                    {% for subject in subjects %}
+
+                        <tr>
+
+                            <td>
+                                {{ subject.description }}
+                            </td>
+
+                            <td>
+
+                                <div class="d-flex align-items-center gap-3">
+
+                                    <a
+                                        href="#"
+                                        class="text-warning js-edit-modal"
+                                        data-modal-target="#createSubjectModal"
+                                        data-modal-title="Edit Subject"
+                                        data-action="/subjects/{{ subject.id }}/update"
+                                        data-id="{{ subject.id }}"
+                                        data-description="{{ subject.description }}"
+                                    >
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+
+                                    <a
+                                        href="{{ path('subject_delete', { id: subject.id }) }}"
+                                        class="text-danger js-confirm-delete"
+                                        data-turbo="false"
+                                        data-message="{{ 'are_you_sure'|trans|e('html_attr') }}"
+                                    >
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
