@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Report
+{% endblock %}
+
+{% block body %}
+
+    <div class="container py-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h1>
+                Books By Author Report
+            </h1>
+
+        </div>
+
+        <div class="mb-4">
+
+            <a
+                href="{{ path('report_books_by_author_pdf') }}"
+                target="_blank"
+                class="btn btn-danger"
+            >
+                <i class="bi bi-file-earmark-pdf-fill"></i>
+            </a>
+
+        </div>
+
+        {% if report is empty %}
+
+            <div class="alert alert-info">
+                No data found.
+            </div>
+
+        {% else %}
+
+            {% for author, books in report %}
+
+                <div class="card shadow-sm border-0 mb-5">
+
+                    <div class="card-header bg-dark text-white">
+
+                        <h4 class="mb-0">
+                            {{ author }}
+                        </h4>
+
+                    </div>
+
+                    <div class="card-body p-0">
+
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-hover mb-0">
+
+                                <thead class="table-light">
+
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Publisher</th>
+                                    <th>Edition</th>
+                                    <th>Year</th>
+                                    <th>Price</th>
+                                    <th>Subjects</th>
+                                </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                {% for book in books %}
+
+                                    <tr>
+
+                                        <td>
+                                            {{ book.book_title }}
+                                        </td>
+
+                                        <td>
+                                            {{ book.publisher }}
+                                        </td>
+
+                                        <td>
+                                            {{ book.edition }}
+                                        </td>
+
+                                        <td>
+                                            {{ book.publication_year }}
+                                        </td>
+
+                                        <td>
+                                            {{ book.price|format_currency('BRL', locale='pt_BR') }}
+                                        </td>
+
+                                        <td>
+                                            {{ book.subjects }}
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
