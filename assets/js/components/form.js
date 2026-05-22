@@ -92,13 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!form) return;
 
-
             if (button.dataset.action) {
 
                 form.action = button.dataset.action;
 
             }
-
 
             const modalTitle = modalElement.querySelector('.js-modal-title');
 
@@ -134,13 +132,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 }
-                input.value = value;
-            });
 
+                if (input.multiple) {
+
+                    input.querySelectorAll('option').forEach(option => {
+                        option.selected = false;
+                    });
+
+                    value.split(',').forEach(selectedValue => {
+
+                        const option = input.querySelector(`option[value="${selectedValue}"]`);
+
+                        if (option) {
+                            option.selected = true;
+                        }
+
+                    });
+
+                } else {
+                    input.value = value;
+                }
+            });
 
             const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
 
             modal.show();
         });
+    });
+
+    document.querySelectorAll('.js-tom-select').forEach(select => {
+
+        if (select.tomselect) return;
+
+        new TomSelect(select, {
+            plugins: ['remove_button'],
+            create: false,
+            persist: false,
+            maxOptions: null,
+            hideSelected: true,
+            closeAfterSelect: false,
+        });
+
     });
 });
