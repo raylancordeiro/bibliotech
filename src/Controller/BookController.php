@@ -34,7 +34,7 @@ class BookController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                'flash.book_created_successfully'
+                    'flash.book_created_successfully'
                 );
 
                 return $this->redirectToRoute('book_index');

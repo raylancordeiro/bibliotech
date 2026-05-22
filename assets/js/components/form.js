@@ -1,42 +1,80 @@
+function formatMoneyInput(el) {
+
+    let value = el.value;
+    value = value.replace(/\D/g, '');
+    value = value.padStart(3, '0');
+
+    const cents = value.slice(-2);
+    const integer = value.slice(0, -2);
+
+    const formattedInt = integer
+        .replace(/^0+/, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    el.value = `${formattedInt || '0'},${cents}`;
+}
+
+function normalizeMoneyValue(value) {
+
+    return value
+        .replace(/\./g, '')
+        .replace(',', '.');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const modalElement = document.getElementById('createBookModal');
+    const forms = document.querySelectorAll('form');
 
-    if (!modalElement) return;
+    forms.forEach(form => {
+        const input = form.querySelector('.js-money-mask');
+        if (!input) return;
 
-    const modal = new bootstrap.Modal(modalElement);
-
-    const form = document.getElementById('createBookForm');
-
-    const createBtn = document.getElementById('createBookBtn');
-
-    const modalTitle = document.getElementById('bookModalTitle');
-
-    const title = document.getElementById('book_title');
-    const publisher = document.getElementById('book_publisher');
-    const edition = document.getElementById('book_edition');
-    const publicationYear = document.getElementById('book_publicationYear');
-    const price = document.getElementById('book_price');
-
-    const editTitle = modalTitle.dataset.editTitle;
-    const createTitle = modalTitle.dataset.createTitle;
-
-    function resetFormToCreateMode() {
-
-        form.action = '/books';
-
-        modalTitle.innerText = modalTitle.dataset.createTitle;
-
-        form.querySelectorAll('.is-invalid').forEach(el => {
-            el.classList.remove('is-invalid');
+        input.addEventListener('input', () => {
+            formatMoneyInput(input);
         });
-    }
 
-    createBtn.addEventListener('click', () => {
-        resetFormToCreateMode();
+        form.addEventListener('submit', () => {
+            input.value = normalizeMoneyValue(input.value);
+        });
+
     });
 
-    const editButtons = document.querySelectorAll('.js-edit-book');
+    const modals = document.querySelectorAll('.js-form-modal');
+
+    modals.forEach(modalElement => {
+
+        const form = modalElement.querySelector('form');
+
+        if (!form) return;
+
+        const shouldOpen = modalElement.dataset.autoOpen === 'true';
+
+        if (shouldOpen) {
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+
+            modal.show();
+        }
+
+        function resetForm() {
+
+            form.reset();
+
+            form.querySelectorAll('.is-invalid').forEach(el => {
+                el.classList.remove('is-invalid');
+            });
+
+        }
+
+        const closeButtons = modalElement.querySelectorAll('.js-modal-close');
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                resetForm();
+            });
+        });
+    });
+
+    const editButtons = document.querySelectorAll('[data-modal-target]');
 
     editButtons.forEach(button => {
 
@@ -44,22 +82,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();
 
-            const id = e.currentTarget.dataset.id;
+            const modalSelector = button.dataset.modalTarget;
 
-            form.action = `/books/${id}/update`;
+            const modalElement = document.querySelector(modalSelector);
 
-            modalTitle.innerText = modalTitle.dataset.editTitle;
+            if (!modalElement) return;
 
-            const rawPrice = button.dataset.price;
+            const form = modalElement.querySelector('form');
 
-            title.value = button.dataset.title;
-            publisher.value = button.dataset.publisher;
-            edition.value = button.dataset.edition;
-            publicationYear.value = button.dataset.publicationYear;
-            price.value = Number(rawPrice).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+            if (!form) return;
+
+
+            if (button.dataset.action) {
+
+                form.action = button.dataset.action;
+
+            }
+
+
+            const modalTitle = modalElement.querySelector('.js-modal-title');
+
+            if (modalTitle && button.dataset.modalTitle) {
+
+                modalTitle.innerText = button.dataset.modalTitle;
+
+            }
+
+            Object.keys(button.dataset).forEach(key => {
+
+                if (
+                    [
+                        'modalTarget',
+                        'modalTitle',
+                        'action'
+                    ].includes(key)
+                ) {
+                    return;
+                }
+
+                const input = form.querySelector(`[name$="[${key}]"]`);
+
+                if (!input) return;
+
+                let value = button.dataset[key];
+
+                if (input.classList.contains('js-money-mask')) {
+
+                    value = Number(value).toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+
+                }
+                input.value = value;
             });
+
+
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
 
             modal.show();
         });

@@ -1,5 +1,5 @@
 <div
-    class="modal fade"
+    class="modal fade js-form-modal"
     id="createBookModal"
     data-auto-open="{{ isFormInvalid ? 'true' : 'false' }}"
     tabindex="-1"
@@ -15,10 +15,10 @@
                 <h5
                     class="modal-title"
                     id="bookModalTitle"
-                    data-create-title="{{ 'create_book'|trans }}"
-                    data-edit-title="{{ 'edit_book'|trans }}"
+                    data-create-title="{{ 'books.create'|trans }}"
+                    data-edit-title="{{ 'book.edit'|trans }}"
                 >
-                    {{ 'create_book'|trans }}
+                    {{ 'books.create'|trans }}
                 </h5>
                 <div class="ms-auto d-flex align-items-center gap-3">
 
@@ -33,7 +33,7 @@
 
                     <button
                         type="button"
-                        class="btn-close btn-close-white"
+                        class="btn-close btn-close-white js-modal-close"
                         data-bs-dismiss="modal"
                         aria-label="Close"
                         id="closeBookBtn"
@@ -62,7 +62,7 @@
                     type="submit"
                     class="btn btn-primary w-100"
                 >
-                    {{ 'save_book'|trans }}
+                    {{ 'save'|trans }}
                 </button>
 
             </div>

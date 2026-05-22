@@ -1,7 +1,15 @@
 .navbar {
-    background: #0A0A0A;
+    background: #212529;
 }
 
-.navbar .navbar-brand {
-    color: #FFFFFF;
+.navbar .logo {
+    width: 14rem;
+    display: block;
+    height: 2rem;
+    margin-right: 2rem;
+    margin-left: 1rem;
+}
+
+.navbar-nav {
+    text-align: left;
 }

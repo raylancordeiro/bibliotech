@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!shouldOpen) return;
 
-    const modal = new bootstrap.Modal(modalElement);
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
 
     modal.show();
 
